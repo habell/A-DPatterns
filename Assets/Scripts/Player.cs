@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Asteroids
 {
     [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(Rigidbody))]
     internal sealed class Player : MonoBehaviour
     {
         [SerializeField]
@@ -23,13 +24,15 @@ namespace Asteroids
         [SerializeField]
         private float _force;
 
+        private Rigidbody _rigidbody;
         private Camera _camera;
         private Ship _ship;
 
         private void Start()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             _camera = Camera.main;
-            var moveTransform = new AccelerationMove(transform, _speed,
+            var moveTransform = new AccelerationMove(_rigidbody, _speed,
                 _acceleration);
             var rotation = new RotationShip(transform);
             _ship = new Ship(moveTransform, rotation);
