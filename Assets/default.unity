@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 1124040728}
   - component: {fileID: 1124040727}
   - component: {fileID: 1124040726}
+  - component: {fileID: 1124040732}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -418,8 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db33f8b4964780a8c610035a7e1612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
-  _acceleration: 0
+  _speed: 10
+  _acceleration: 100
   _health: {fileID: 0}
   _bullet: {fileID: -5998808389245729093, guid: 8f29a0a3e8edb4d4580a8832f305f1de, type: 3}
   _barrel: {fileID: 1501944854}
@@ -516,6 +517,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1124040732
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124040725}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1501944853
 GameObject:
   m_ObjectHideFlags: 0
