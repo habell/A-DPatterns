@@ -12,8 +12,6 @@ namespace Asteroids
         [SerializeField]
         private float _acceleration;
 
-        [SerializeField]
-        private Health _health;
 
         [SerializeField]
         private Rigidbody _bullet;
@@ -36,7 +34,6 @@ namespace Asteroids
                 _acceleration);
             var rotation = new RotationShip(transform);
             _ship = new Ship(moveTransform, rotation);
-            _health = gameObject.GetComponent<Health>();
         }
 
         private void Update()
