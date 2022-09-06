@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    [RequireComponent(typeof(Health))]
     [RequireComponent(typeof(Rigidbody))]
     internal sealed class Player : MonoBehaviour
     {

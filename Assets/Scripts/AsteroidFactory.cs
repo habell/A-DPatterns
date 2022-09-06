@@ -10,7 +10,6 @@ namespace Asteroids
                 Object.Instantiate(Resources.Load<Asteroid>("Enemy/Asteroid"));
             enemy.DependencyInjectHealth(hp);
             return enemy;
-
         }
     }
 }
