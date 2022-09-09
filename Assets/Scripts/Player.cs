@@ -38,12 +38,17 @@ namespace Asteroids
             
             var moveTransform = new AccelerationMove(_rigidbody, _speed,
                 _acceleration);
+            
             var rotation = new RotationShip(transform);
+            
             var ship = new Ship(moveTransform, rotation);
+            
             _platerShipController = gameObject.AddComponent<PlaterShipController>();
-
+            
             Health = new Health(_preset.Health, _preset.Health);
-            _platerShipController.CreateShip(Camera.main, ship);
+            _platerShipController.CreateShip(Camera.main, ship, this);
+
+            _bulletPool = new BulletPool(gameObject);
         }
 
         private void Update()
