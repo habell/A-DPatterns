@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Asteroid", menuName = "AsteroidPreset")]
-    public class AsteroidPreset : ScriptableObject, IPreset
+    [CreateAssetMenu(fileName = "Enemy", menuName = "EnemyPreset")]
+    public class EnemyPreset : ScriptableObject, IPreset
     {
         [SerializeField]
         private EnemyStruct _enemyStruct;

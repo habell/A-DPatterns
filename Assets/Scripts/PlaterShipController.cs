@@ -6,6 +6,7 @@ namespace Asteroids
     {
         private Camera _camera;
         private Ship _ship;
+        private Player _ply;
 
         public void CreateShip(Camera camera, Ship ship)
         {
@@ -35,6 +36,7 @@ namespace Asteroids
 
             if (Input.GetButtonDown("Fire1"))
             {
+                
                 //var temAmmunition = Instantiate(_bullet, _barrel.position,
                 //    _barrel.rotation);
                 //temAmmunition.AddForce(_barrel.up * _force);

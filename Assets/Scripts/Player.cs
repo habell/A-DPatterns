@@ -28,6 +28,8 @@ namespace Asteroids
         
         private BulletPool _bulletPool;
 
+        public BulletPool BulletPool => _bulletPool;
+
         public Health Health;
 
         private void Awake()

@@ -8,10 +8,10 @@ namespace Asteroids
     public abstract class Enemy : MonoBehaviour
     {
         public static IEnemyFactory Factory;
-        
-        [SerializeField]
-        private IPreset _preset;
 
+        [SerializeField]
+        private EnemyPreset _preset; 
+        
         private Transform _rootPool;
 
         private Health _health;
