@@ -1,11 +1,15 @@
 using DefaultNamespace;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Asteroids
 {
     [RequireComponent(typeof(Rigidbody))]
-    internal sealed class Player : MonoBehaviour
+    internal sealed class Player : MonoBehaviour, IHealth
     {
+        [SerializeField]
+        private PlayerParams _params;
+        
         [SerializeField]
         private float _speed;
 
@@ -24,15 +28,19 @@ namespace Asteroids
         
         private BulletPool _bulletPool;
 
+        public Health Health;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-
+            
             var moveTransform = new AccelerationMove(_rigidbody, _speed,
                 _acceleration);
             var rotation = new RotationShip(transform);
             var ship = new Ship(moveTransform, rotation);
             _platerShipController = gameObject.AddComponent<PlaterShipController>();
+
+            Health = new Health(_params.Health, _params.Health);
             _platerShipController.CreateShip(Camera.main, ship);
         }
 
@@ -40,5 +48,9 @@ namespace Asteroids
         {
 
         }
+    }
+
+    internal interface IHealth
+    {
     }
 }

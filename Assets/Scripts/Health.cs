@@ -16,6 +16,10 @@ namespace Asteroids
         public void ChangeCurrentHealth(float hp)
         {
             Current = hp;
+            if (Current <= 0)
+            {
+                Debug.Log("This object is DEATH!");
+            }
         }
     }
 }

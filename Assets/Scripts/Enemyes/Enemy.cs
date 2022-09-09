@@ -1,10 +1,17 @@
 using Asteroids.Object_Pool;
+using Enums;
+using ScriptableObjects;
 using UnityEngine;
 namespace Asteroids
 {
     public abstract class Enemy : MonoBehaviour
     {
         public static IEnemyFactory Factory;
+        
+        [SerializeField]
+        private EnemyType _enemyType;
+        
+        public EnemyType EnemyType => _enemyType;
 
         private Transform _rootPool;
 
