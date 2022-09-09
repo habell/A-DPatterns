@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Player", menuName = "PlayerParameters")]
-    public class PlayerParams : ScriptableObject
+    [CreateAssetMenu(fileName = "Player", menuName = "PlayerPreset")]
+    public class PlayerPreset : ScriptableObject
     {
         [SerializeField]
         private float _health;

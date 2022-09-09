@@ -1,3 +1,4 @@
+using System;
 using Asteroids.Object_Pool;
 using Enums;
 using ScriptableObjects;
@@ -9,9 +10,7 @@ namespace Asteroids
         public static IEnemyFactory Factory;
         
         [SerializeField]
-        private EnemyType _enemyType;
-        
-        public EnemyType EnemyType => _enemyType;
+        private IPreset _preset;
 
         private Transform _rootPool;
 
@@ -43,6 +42,7 @@ namespace Asteroids
                 return _rootPool;
             }
         }
+
         public static Asteroid CreateAsteroidEnemy(Health hp)
         {
             var enemy = Instantiate(Resources.Load<Asteroid>("Enemy/Asteroid"));

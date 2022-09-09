@@ -8,7 +8,7 @@ namespace Asteroids
     internal sealed class Player : MonoBehaviour, IHealth
     {
         [SerializeField]
-        private PlayerParams _params;
+        private PlayerPreset _preset;
         
         [SerializeField]
         private float _speed;
@@ -40,7 +40,7 @@ namespace Asteroids
             var ship = new Ship(moveTransform, rotation);
             _platerShipController = gameObject.AddComponent<PlaterShipController>();
 
-            Health = new Health(_params.Health, _params.Health);
+            Health = new Health(_preset.Health, _preset.Health);
             _platerShipController.CreateShip(Camera.main, ship);
         }
 
