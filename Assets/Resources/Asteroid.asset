@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a2b55048c64f0f949d4883b7284f73, type: 3}
   m_Name: Asteroid
   m_EditorClassIdentifier: 
+  _enemyStruct:
+    _type: 0
+    Health: 100
+    Damage: 20
+    Speed: 0.1
