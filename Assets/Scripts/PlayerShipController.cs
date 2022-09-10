@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+
 namespace Asteroids
 {
-    internal class PlaterShipController : MonoBehaviour 
+    internal class PlayerShipController : MonoBehaviour
     {
         private Camera _camera;
         private Ship _ship;
@@ -38,8 +39,7 @@ namespace Asteroids
             if (Input.GetButtonDown("Fire1"))
             {
                 var bullet = _ply.BulletPool.GetBullet();
-                bullet.transform.position = Vector3.back;
-                bullet.gameObject.SetActive(true);
+                bullet.Shot(_ply);
                 //var temAmmunition = Instantiate(_bullet, _barrel.position,
                 //    _barrel.rotation);
                 //temAmmunition.AddForce(_barrel.up * _force);
