@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class BulletPool
+    internal class BulletPool
     {
         private const int DEFAULT_BULLETS = 15;
         private List<Bullet> _bullets = new();
         private Transform _poolParent;
         private BulletFactory _bulletFactory;
+
+        public Transform PoolParent => _poolParent;
         
         public BulletPool(GameObject parent)
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public class BulletFactory
+    internal class BulletFactory
     {
         public Bullet Create()
         {
