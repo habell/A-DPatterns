@@ -10,7 +10,7 @@ namespace Enemyes
         {
             var enemy =
                 Object.Instantiate(Resources.Load<Asteroid>(RESOURCE_FOLDER));
-            enemy.DependencyInjectHealth(hp);
+            //enemy.DependencyInjectHealth(hp);
             return enemy;
         }
     }
