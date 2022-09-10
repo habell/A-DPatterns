@@ -2,27 +2,24 @@ using UnityEngine;
 
 namespace Asteroids
 {
-    public class Health : MonoBehaviour
+    public class Health
     {
-        [SerializeField]
-        private float _hp;
+        public float Max { get; }
+        public float Current { get; private set; }
 
-        public float HP
+        public Health(float max, float current)
         {
-            get { return _hp; }
-            set
-            {
-                _hp -= value;
-                if (_hp <= 0)
-                {
-                    Destroy(gameObject);
-                }
-            }
+            Max = max;
+            Current = current;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void ChangeCurrentHealth(float hp)
         {
-            HP--;
+            Current = hp;
+            if (Current <= 0)
+            {
+                Debug.Log("This object is DEATH!");
+            }
         }
     }
 }

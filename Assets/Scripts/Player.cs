@@ -1,67 +1,55 @@
+using DefaultNamespace;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Asteroids
 {
-    [RequireComponent(typeof(Health))]
     [RequireComponent(typeof(Rigidbody))]
-    internal sealed class Player : MonoBehaviour
+    internal sealed class Player : MonoBehaviour, IHealth
     {
         [SerializeField]
-        private float _speed;
-
-        [SerializeField]
-        private float _acceleration;
-
-        [SerializeField]
-        private Health _health;
-
-        [SerializeField]
-        private Rigidbody _bullet;
-
+        private PlayerPreset _preset;
+        
         [SerializeField]
         private Transform _barrel;
-
-        [SerializeField]
-        private float _force;
+        public Transform Barrel => _barrel;
 
         private Rigidbody _rigidbody;
-        private Camera _camera;
-        private Ship _ship;
 
-        private void Start()
+        private PlayerShipController _playerShipController;
+        
+        private BulletPool _bulletPool;
+        public BulletPool BulletPool => _bulletPool;
+
+        public Health Health { get; set; }
+        public void Death()
+        {
+            print("you are die");
+        }
+
+
+        private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _camera = Camera.main;
-            var moveTransform = new AccelerationMove(_rigidbody, _speed,
-                _acceleration);
+            
+            var moveTransform = new AccelerationMove(_rigidbody, _preset.Speed,
+                _preset.Speed * 2);
+            
             var rotation = new RotationShip(transform);
-            _ship = new Ship(moveTransform, rotation);
-            _health = gameObject.GetComponent<Health>();
+            
+            var ship = new Ship(moveTransform, rotation);
+            
+            _playerShipController = gameObject.AddComponent<PlayerShipController>();
+            
+            Health = new Health(_preset.Health, _preset.Health);
+            _playerShipController.CreateShip(Camera.main, ship, this);
+
+            _bulletPool = new BulletPool(gameObject);
         }
 
         private void Update()
         {
-            var direction = Input.mousePosition -
-                            _camera.WorldToScreenPoint(transform.position);
-            _ship.Rotation(direction);
-            _ship.Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),
-                Time.deltaTime);
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                _ship.AddAcceleration();
-            }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                _ship.RemoveAcceleration();
-            }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                var temAmmunition = Instantiate(_bullet, _barrel.position,
-                    _barrel.rotation);
-                temAmmunition.AddForce(_barrel.up * _force);
-            }
         }
     }
 }
