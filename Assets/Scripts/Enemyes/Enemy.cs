@@ -13,23 +13,11 @@ namespace Asteroids
         private EnemyPreset _preset; 
         
         private Transform _rootPool;
+        
+        public EnemyPreset Preset => _preset;
 
-        private Health _health;
-
-        public Health Health
-        {
-            get
-            {
-                if (_health.Current <= 0.0f)
-                {
-                    ReturnToPool();
-                }
-
-                return _health;
-            }
-            protected set => _health = value;
-        }
-
+        protected abstract void RefreshParameters();
+        
         public Transform RootPool
         {
             get
@@ -42,19 +30,14 @@ namespace Asteroids
                 return _rootPool;
             }
         }
-
-        public static Asteroid CreateAsteroidEnemy(Health hp)
-        {
-            var enemy = Instantiate(Resources.Load<Asteroid>("Enemy/Asteroid"));
-            enemy.Health = hp;
-            return enemy;
-        }
+        
         public void ActiveEnemy(Vector3 position, Quaternion rotation)
         {
             transform.localPosition = position;
             transform.localRotation = rotation;
             gameObject.SetActive(true);
             transform.SetParent(null);
+            RefreshParameters();
         }
         protected void ReturnToPool()
         {
@@ -67,10 +50,10 @@ namespace Asteroids
                 Destroy(gameObject);
             }
         }
-        public void DependencyInjectHealth(Health hp)
-        {
-            Health = hp;
-        }
+        //public void DependencyInjectHealth(Health hp)
+        //{
+        //    Health = hp;
+        //}
 
     }
 }
