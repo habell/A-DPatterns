@@ -31,6 +31,9 @@ namespace Asteroids.Object_Pool
                 case "Asteroid":
                     result = GetAsteroid(GetListEnemies(type));
                     break;
+                case "Monster":
+                    result = GetMonster(GetListEnemies(type));
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type,
                         "Не предусмотрен в программе");
@@ -49,15 +52,35 @@ namespace Asteroids.Object_Pool
             var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
             if (enemy == null)
             {
-                var laser = Resources.Load<Asteroid>("Enemy/Asteroid");
+                var asteroid = Resources.Load<Asteroid>("Enemy/Asteroid");
                 for (var i = 0; i < _capacityPool; i++)
                 {
-                    var instantiate = Object.Instantiate(laser);
+                    var instantiate = Object.Instantiate(asteroid);
                     ReturnToPool(instantiate.transform);
                     enemies.Add(instantiate);
                 }
 
                 GetAsteroid(enemies);
+            }
+
+            enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
+            return enemy;
+        }
+        
+        private Enemy GetMonster(HashSet<Enemy> enemies)
+        {
+            var enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
+            if (enemy == null)
+            {
+                var monster = Resources.Load<Monster>("Enemy/Monster");
+                for (var i = 0; i < _capacityPool; i++)
+                {
+                    var instantiate = Object.Instantiate(monster);
+                    ReturnToPool(instantiate.transform);
+                    enemies.Add(instantiate);
+                }
+
+                GetMonster(enemies);
             }
 
             enemy = enemies.FirstOrDefault(a => !a.gameObject.activeSelf);
