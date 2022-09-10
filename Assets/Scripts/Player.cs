@@ -11,42 +11,38 @@ namespace Asteroids
         private PlayerPreset _preset;
         
         [SerializeField]
-        private float _speed;
-
-        [SerializeField]
-        private float _acceleration;
-
-        [SerializeField]
         private Transform _barrel;
-
-        [SerializeField]
-        private float _force;
+        public Transform Barrel => _barrel;
 
         private Rigidbody _rigidbody;
 
-        private PlaterShipController _platerShipController;
+        private PlayerShipController _playerShipController;
         
         private BulletPool _bulletPool;
-
         public BulletPool BulletPool => _bulletPool;
 
-        public Health Health;
+        public Health Health { get; set; }
+        public void Death()
+        {
+            print("you are die");
+        }
+
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             
-            var moveTransform = new AccelerationMove(_rigidbody, _speed,
-                _acceleration);
+            var moveTransform = new AccelerationMove(_rigidbody, _preset.Speed,
+                _preset.Speed * 2);
             
             var rotation = new RotationShip(transform);
             
             var ship = new Ship(moveTransform, rotation);
             
-            _platerShipController = gameObject.AddComponent<PlaterShipController>();
+            _playerShipController = gameObject.AddComponent<PlayerShipController>();
             
             Health = new Health(_preset.Health, _preset.Health);
-            _platerShipController.CreateShip(Camera.main, ship, this);
+            _playerShipController.CreateShip(Camera.main, ship, this);
 
             _bulletPool = new BulletPool(gameObject);
         }
@@ -55,9 +51,5 @@ namespace Asteroids
         {
 
         }
-    }
-
-    internal interface IHealth
-    {
     }
 }
